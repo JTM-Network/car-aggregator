@@ -1,6 +1,5 @@
-
 server:
-  port: 8333
+  port: 9333
   error:
     include-message: always
 
