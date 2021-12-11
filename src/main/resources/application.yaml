@@ -1,0 +1,21 @@
+
+server:
+  port: 8333
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: car-aggregator
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  profiles:
+    active: ${PROFILE}
+
+reactor:
+  ipc:
+    netty:
+      workerCount: 1
