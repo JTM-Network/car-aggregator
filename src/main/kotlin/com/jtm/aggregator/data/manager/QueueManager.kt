@@ -35,6 +35,7 @@ class QueueManager @Autowired constructor(private val executor: ExecutorService,
         queue.add(operation)
         val sink: Sinks.Many<OperationEvent> = Sinks.many().replay().all()
         sinks[operation.id()] = sink
+        logger.info("Successfully added ${operation.name()} operation..")
         return sink.asFlux().map { ServerSentEvent.builder(it).build() }
     }
 
