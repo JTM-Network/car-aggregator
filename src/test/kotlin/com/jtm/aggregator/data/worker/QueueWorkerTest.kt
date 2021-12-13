@@ -12,6 +12,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.springframework.test.context.junit4.SpringRunner
 import reactor.core.publisher.Mono
+import java.util.*
 
 @RunWith(SpringRunner::class)
 class QueueWorkerTest {
@@ -42,7 +43,7 @@ class QueueWorkerTest {
     fun process() {
         `when`(queueManager.getOperation()).thenReturn(operation)
         `when`(operation.run()).thenReturn(Mono.empty())
-        `when`(statsRepository.save(any())).thenReturn(Mono.just(OperationStats(name = "test", startTime = System.currentTimeMillis(), timeTaken = System.currentTimeMillis())))
+        `when`(statsRepository.save(any())).thenReturn(Mono.just(OperationStats(id = UUID.randomUUID(), name = "test", startTime = System.currentTimeMillis(), timeTaken = System.currentTimeMillis())))
 
         queueWorker.process()
 
