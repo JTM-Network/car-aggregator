@@ -1,5 +1,6 @@
 package com.jtm.aggregator
 
+import com.jtm.aggregator.data.manager.QueueManagerTest
 import com.jtm.aggregator.data.service.MakeServiceTest
 import com.jtm.aggregator.data.service.ModelServiceTest
 import com.jtm.aggregator.data.service.TrimServiceTest
@@ -17,6 +18,8 @@ import org.junit.runners.Suite
 
     MakeControllerTest::class,
     ModelControllerTest::class,
-    TrimControllerTest::class
+    TrimControllerTest::class,
+
+    QueueManagerTest::class
 ])
 class CarApplicationTestSuite
