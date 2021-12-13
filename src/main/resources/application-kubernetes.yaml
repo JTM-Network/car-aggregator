@@ -10,3 +10,6 @@ sentry:
 redis:
   host: ${REDIS_HOST}
   port: ${REDIS_PORT}
+
+discord:
+  token: ${DISCORD_TOKEN}
