@@ -24,6 +24,7 @@ class QueueWorkerTest {
 
     @Before
     fun setup() {
+        `when`(operation.id()).thenReturn(UUID.randomUUID())
         `when`(operation.name()).thenReturn("test")
         `when`(operation.startTime()).thenReturn(System.currentTimeMillis())
         `when`(operation.timeTaken()).thenReturn(System.currentTimeMillis())
@@ -47,6 +48,7 @@ class QueueWorkerTest {
 
         queueWorker.process()
 
+        verify(operation, times(1)).id()
         verify(operation, times(1)).init()
         verify(operation, times(1)).run()
         verify(operation, times(1)).post()
