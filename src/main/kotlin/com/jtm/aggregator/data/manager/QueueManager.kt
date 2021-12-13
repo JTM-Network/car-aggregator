@@ -39,7 +39,11 @@ class QueueManager @Autowired constructor(private val executor: ExecutorService,
     }
 
     fun sendEvent(id: UUID, event: OperationEvent) {
-        val sink = sinks[id] ?: return
+        val sink = sinks[id]
+        if (sink == null) {
+            logger.info("Sink not found.")
+            return
+        }
         val result = sink.tryEmitNext(event)
         if (result.isFailure) logger.info("Failed to send event.")
     }
