@@ -12,6 +12,7 @@ class SearchOperation(queueManager: QueueManager): OperationImpl(queueManager, n
 
     override fun run(): Mono<Void> {
         logger.info("Searching for stuff.")
+        Thread.sleep(10 * 1000)
         sendEvent(OperationEvent("SEARCHING"))
         Thread.sleep(1000)
         sendEvent(OperationEvent("COMPLETED"))
