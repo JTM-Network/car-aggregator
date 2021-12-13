@@ -4,4 +4,9 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
 
 @Document("operation_stats")
-data class OperationStats(val id: UUID, val name: String, val startTime: Long, val timeTaken: Long)
+data class OperationStats(val id: UUID, val name: String, val startTime: Long, val timeTaken: Long) {
+
+    override fun toString(): String {
+        return "-----------------\nName: $name\nStartTime: $startTime\nTime Taken: $timeTaken\n-----------------"
+    }
+}

@@ -16,26 +16,17 @@ import javax.annotation.PostConstruct
 import kotlin.collections.HashMap
 
 @Component
-class QueueManager @Autowired constructor(private val executor: ExecutorService, private val statsRepository: OperationStatsRepository) {
+class QueueManager(var queue: PriorityQueue<Operation> = PriorityQueue(1000)) {
 
-    constructor(executor: ExecutorService, queue: PriorityQueue<Operation>, statsRepository: OperationStatsRepository): this(executor, statsRepository) {
-        this.queue = queue
-    }
-
-    private var queue: PriorityQueue<Operation> = PriorityQueue(1000)
     private val sinks: MutableMap<UUID, Sinks.Many<OperationEvent>> = HashMap()
     private val logger = LoggerFactory.getLogger(QueueManager::class.java)
-
-    @PostConstruct
-    fun init() {
-        executor.submit(QueueWorker(this, statsRepository))
-    }
 
     fun publish(operation: Operation): Flux<ServerSentEvent<OperationEvent>> {
         queue.add(operation)
         val sink: Sinks.Many<OperationEvent> = Sinks.many().replay().all()
         sinks[operation.id()] = sink
         logger.info("Successfully added ${operation.name()} operation..")
+        sendEvent(operation.id(), OperationEvent("QUEUED"))
         return sink.asFlux().map { ServerSentEvent.builder(it).build() }
     }
 
@@ -47,10 +38,5 @@ class QueueManager @Autowired constructor(private val executor: ExecutorService,
         }
         val result = sink.tryEmitNext(event)
         if (result.isFailure) logger.info("Failed to send event.")
-    }
-
-    fun getOperation(): Operation? {
-        if (queue.isEmpty()) return null
-        return queue.poll()
     }
 }
