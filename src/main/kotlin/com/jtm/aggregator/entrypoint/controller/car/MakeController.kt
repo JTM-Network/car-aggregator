@@ -1,4 +1,4 @@
-package com.jtm.aggregator.entrypoint.controller
+package com.jtm.aggregator.entrypoint.controller.car
 
 import com.jtm.aggregator.core.domain.entity.Make
 import com.jtm.aggregator.core.usecase.repository.MakeRepository

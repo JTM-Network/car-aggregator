@@ -2,9 +2,9 @@ package com.jtm.aggregator.entrypoint.controller
 
 import com.jtm.aggregator.core.domain.entity.Model
 import com.jtm.aggregator.data.service.ModelService
+import com.jtm.aggregator.entrypoint.controller.car.ModelController
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.times

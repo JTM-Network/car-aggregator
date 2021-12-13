@@ -2,6 +2,7 @@ package com.jtm.aggregator.entrypoint.controller
 
 import com.jtm.aggregator.core.domain.entity.Trim
 import com.jtm.aggregator.data.service.TrimService
+import com.jtm.aggregator.entrypoint.controller.car.TrimController
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.*
@@ -13,7 +14,6 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.reactive.server.WebTestClient
-import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.util.*

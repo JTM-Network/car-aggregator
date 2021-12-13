@@ -15,11 +15,10 @@ class QueueWorker(private val queueManager: QueueManager, private val statsRepos
     }
 
     fun process() {
-
         val operation = queueManager.getOperation() ?: return
         operation.init()
         operation.run().block()
         operation.post()
-        statsRepository.save(OperationStats(name = operation.name(), startTime = operation.startTime(), timeTaken = operation.timeTaken())).block()
+        statsRepository.save(OperationStats(id = operation.id(), name = operation.name(), startTime = operation.startTime(), timeTaken = operation.timeTaken())).block()
     }
 }

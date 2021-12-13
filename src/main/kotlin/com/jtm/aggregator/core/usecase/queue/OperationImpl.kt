@@ -1,6 +1,10 @@
 package com.jtm.aggregator.core.usecase.queue
 
-abstract class OperationImpl(val name: String, private val priority: Int): Operation {
+import com.jtm.aggregator.core.domain.model.OperationEvent
+import com.jtm.aggregator.data.manager.QueueManager
+import java.util.*
+
+abstract class OperationImpl(val queueManager: QueueManager, val id: UUID = UUID.randomUUID(), val name: String, private val priority: Int): Operation {
 
     private var startTime: Long = 0
     private var taken: Long = 0
@@ -11,6 +15,22 @@ abstract class OperationImpl(val name: String, private val priority: Int): Opera
 
     override fun post() {
         this.taken = (System.currentTimeMillis() - startTime)
+    }
+
+    override fun sendEvent(event: OperationEvent) {
+        queueManager.sendEvent(id, event)
+    }
+
+    override fun id(): UUID {
+        return id
+    }
+
+    override fun name(): String {
+        return name
+    }
+
+    override fun priority(): Int {
+        return priority
     }
 
     override fun timeTaken(): Long {
