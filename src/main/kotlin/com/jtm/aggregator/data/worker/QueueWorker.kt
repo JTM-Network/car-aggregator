@@ -4,7 +4,6 @@ import com.jtm.aggregator.core.domain.entity.OperationStats
 import com.jtm.aggregator.core.usecase.repository.OperationStatsRepository
 import com.jtm.aggregator.data.manager.QueueManager
 import org.slf4j.LoggerFactory
-import kotlin.math.log
 
 class QueueWorker(private val queueManager: QueueManager, private val statsRepository: OperationStatsRepository): Runnable {
 

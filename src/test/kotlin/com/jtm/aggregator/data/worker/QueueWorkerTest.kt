@@ -52,7 +52,7 @@ class QueueWorkerTest {
         verify(operation, times(1)).init()
         verify(operation, times(1)).run()
         verify(operation, times(1)).post()
-        verify(operation, times(1)).name()
+        verify(operation, times(2)).name()
         verify(operation, times(1)).startTime()
         verify(operation, times(1)).timeTaken()
         verifyNoMoreInteractions(operation)
