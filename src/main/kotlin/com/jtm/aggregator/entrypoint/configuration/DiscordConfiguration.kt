@@ -20,7 +20,7 @@ open class DiscordConfiguration {
         builder.addEventListeners(PingCommand())
         builder.setActivity(Activity.watching("JTM Network"))
         val jda = builder.build()
-        jda.upsertCommand("/ping", "Calculate ping of the bot").queue()
+        jda.upsertCommand("ping", "Calculate ping of the bot").queue()
         return jda
     }
 }
