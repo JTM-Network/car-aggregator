@@ -15,12 +15,7 @@ class QueueWorker(private val queueManager: QueueManager, private val statsRepos
     }
 
     fun process() {
-        val operation = queueManager.getOperation()
-        if (operation == null) {
-            logger.info("Operation not found.")
-            return
-        }
-
+        val operation = queueManager.getOperation() ?: return
         logger.info("Operation found ${operation.name()}...")
         operation.init()
         operation.run().block()
